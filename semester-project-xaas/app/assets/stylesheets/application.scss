@@ -13,3 +13,17 @@
  *= require_tree .
  *= require_self
  */
+ @import 'bootstrap';
+
+.navigation{
+ li{
+  display: inline-block;
+  border-bottom: 1px solid black;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+ }
+ a {
+  text-decoration: none;
+ }
+}
