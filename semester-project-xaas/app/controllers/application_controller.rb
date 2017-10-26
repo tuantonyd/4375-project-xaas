@@ -35,7 +35,7 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
     logger.warn("Permitted parameters:")
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :address, :city, :state_id])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :address, :city, :state_id, :stripeToken])
   end
 
 end

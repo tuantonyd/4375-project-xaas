@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
 
   # GET /orders
   # GET /orders.json
-
+Stripe.api_key = "sk_test_XraleY3YiXwA1SaECNkivejC"
 
   def index
     @orders = Order.where(customer: current_customer)
@@ -31,12 +31,17 @@ class OrdersController < ApplicationController
   # POST /orders
   # POST /orders.json
   def create
+    token = params[:stripeToken]
+    total = (get_cart_total*100).round
+    charge = Stripe::Charge.create(
+      :amount => total,
+      :currency => "usd",
+      :description => "Example charge",
+      :source => token,
+    )
+    logger.warn("stripe token::::: " + token)
     @items = get_cart_items
     @customer = current_customer
-    @total = 0
-    @items.each do |item|
-      @total = @total + item.price
-    end
     @order = Order.create(customer: @customer, total: @total)
     @items.each do |item|
       @order_contents = OrderContent.create(order_id: @order.id, item_id: item.id)
@@ -49,8 +54,7 @@ class OrdersController < ApplicationController
     end
   end
 
-  def creat_charge
-  end
+
 
   # PATCH/PUT /orders/1
   # PATCH/PUT /orders/1.json
