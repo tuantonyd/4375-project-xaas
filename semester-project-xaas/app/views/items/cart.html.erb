@@ -5,12 +5,15 @@
     <td>Price</td>
   </tr>
   </thead>
-<% @items.each do |item| %>
+
+<% @items.each_with_index do |item, index| %>
     <tr>
       <td><%=item.name%></td>
       <td><%=item.price%></td>
+      <td><div class="button" onClick=deleteCookie(<%=index%>)>Remove from Cart</div></td>
     </tr>
 <% end %>
 </table>
+<form>
 
 <%= link_to "Check Out", check_out_path %>
