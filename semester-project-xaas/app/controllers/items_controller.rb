@@ -30,6 +30,9 @@ class ItemsController < ApplicationController
     @items = get_cart_items
     puts "Items in array: "
     puts @items
+    puts "Cart total: "
+    puts get_cart_total
+    @total = get_cart_total
   end
 
 

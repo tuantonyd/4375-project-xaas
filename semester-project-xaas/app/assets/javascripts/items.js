@@ -32,4 +32,11 @@ $('#addToCart').on('click', function(){
 
 });
 
+function deleteCookie(itemId){
+  var itemId = parseInt(itemId) + 1
+  console.log("Deleting cookie: item_" + itemId)
+  document.cookie = "item_" + itemId + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+  location.reload();
+}
+
 console.log($('#addToCart'));
