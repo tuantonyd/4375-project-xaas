@@ -20,7 +20,7 @@ class OrdersController < ApplicationController
   # GET /orders/new
   def new
     @order = Order.new
-    @item = Item.find(params[:item])
+    @total = get_cart_total
     @customer = current_customer
   end
 
@@ -47,6 +47,9 @@ class OrdersController < ApplicationController
       del_cookies
       redirect_to :root
     end
+  end
+
+  def creat_charge
   end
 
   # PATCH/PUT /orders/1
