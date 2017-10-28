@@ -2,21 +2,24 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
   def get_cart_items
-    @items = []
+    @cart_items = []
+    logger.warn(cookies)
     cookies.each do |cookie|
       if (cookie[0].include? "item_")
-        item_id = cookie[1]
-        @items << Item.find(cookie[1])
+        item_cookie = cookie[1].split("|")
+        logger.warn(cookie[1])
+         @cart_items << {item: Item.find(item_cookie[0]), qty: item_cookie[1]}
       end
     end
-    return @items
+    return @cart_items
   end
 
   def get_cart_total
-    @items = get_cart_items
+    @cart_items = get_cart_items
     total = 0.0
-    @items.each do |item|
-      total = item.price + total
+    logger.warn(@cart_items)
+    @cart_items.each do |cart_item|
+      total = (cart_item[:item].price.to_d * cart_item[:qty].to_d) + total
     end
     return total
   end

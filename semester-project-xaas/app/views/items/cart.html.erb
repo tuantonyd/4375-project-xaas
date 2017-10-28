@@ -3,14 +3,17 @@
   <tr>
     <td>Name</td>
     <td>Price</td>
+    <td>Quantity</td>
   </tr>
   </thead>
 
-<% @items.each_with_index do |item, index| %>
+<% @cart_items.each_with_index do |cart_item, index| %>
     <tr>
-      <td><%=item.name%></td>
-      <td><%=item.price%></td>
-      <td><div class="button" onClick=deleteCookie(<%=index%>)>Remove from Cart</div></td>
+      <td><%=cart_item[:item].name%></td>
+      <td><%=cart_item[:item].price%></td>
+      <td><%=cart_item[:qty]%></td>
+      <td><a href="/cart/remove?cookieIndex=<%= index %>" >Remove from Cart</div></td>
+
     </tr>
 <% end %>
 </table>

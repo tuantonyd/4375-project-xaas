@@ -1,14 +1,16 @@
 var cookie = document.cookie;
-function setItemsCookie(itemId, cartCount){
+function setItemsCookie(itemId, cartCount,qty){
+
+    item = itemId+"|"+qty;
     console.log(itemId.length);
     console.log("Setting Cookie");
-    document.cookie = "item_" + cartCount + "=" + itemId+";path=/";
+    document.cookie = "item_" + cartCount + "=" + item+";path=/";
     document.cookie = "itemsInCart="+ cartCount +";path=/"
     console.log(document.cookie)
     cookie = document.cookie;
 }
 
-function addItemsToCookie(itemId) {
+function addItemsToCookie(itemId,qty) {
     if (cookie != 0) {
         var cookies = cookie.split(";")
         nCookies = cookies.length;
@@ -17,17 +19,18 @@ function addItemsToCookie(itemId) {
     console.log(cookies);
     console.log(nCookies);
     if (nCookies == 0){
-        setItemsCookie(itemId, 1);
+        setItemsCookie(itemId, 1, qty);
     }
     else{
-        setItemsCookie(itemId, nCookies);
+        setItemsCookie(itemId, nCookies, qty);
     }
 }
 
 $('#addToCart').on('click', function(){
     itemId = $('#item').val();
-    console.log("Clicked");
-    addItemsToCookie(itemId);
+    qty = $('#qty').val();
+    console.log("Item: " + itemId, "Quantity: "  + qty);
+    addItemsToCookie(itemId,qty);
     window.alert("Added to cart!");
 
 });

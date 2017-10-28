@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171011225553) do
+ActiveRecord::Schema.define(version: 20171010210839) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 20171011225553) do
   create_table "order_contents", force: :cascade do |t|
     t.bigint "order_id"
     t.bigint "item_id"
+    t.integer "qty"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["item_id"], name: "index_order_contents_on_item_id"
@@ -73,13 +74,20 @@ ActiveRecord::Schema.define(version: 20171011225553) do
   create_table "orders", force: :cascade do |t|
     t.decimal "total"
     t.string "notes"
-    t.string "customer"
+    t.bigint "customer_id"
     t.bigint "order_status_id"
+    t.string "address"
+    t.string "city"
+    t.bigint "state_id"
+    t.bigint "country_id"
+    t.integer "zip"
+    t.string "stripe_key"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "customer_id"
+    t.index ["country_id"], name: "index_orders_on_country_id"
     t.index ["customer_id"], name: "index_orders_on_customer_id"
     t.index ["order_status_id"], name: "index_orders_on_order_status_id"
+    t.index ["state_id"], name: "index_orders_on_state_id"
   end
 
   create_table "states", force: :cascade do |t|
@@ -90,6 +98,5 @@ ActiveRecord::Schema.define(version: 20171011225553) do
 
   add_foreign_key "order_contents", "items"
   add_foreign_key "order_contents", "orders"
-  add_foreign_key "orders", "customers"
   add_foreign_key "orders", "order_statuses"
 end
