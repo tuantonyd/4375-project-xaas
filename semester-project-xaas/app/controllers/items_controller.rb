@@ -24,6 +24,14 @@ class ItemsController < ApplicationController
   end
 
 
+  def remove_cookie
+    logger.warn "DELETING COOKIE"
+    cookie_id = "item_" + params[:cookieIndex]
+    logger.warn(cookie_id)
+    logger.warn(cookies[cookie_id])
+    cookies.delete cookie_id
+    redirect_to :cart
+  end
 
   def cart
     @items = Array.new

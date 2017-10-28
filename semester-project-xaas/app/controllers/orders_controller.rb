@@ -39,19 +39,28 @@ Stripe.api_key = "sk_test_XraleY3YiXwA1SaECNkivejC"
       :description => "Example charge",
       :source => token,
     )
+    logger.warn(charge.outcome.network_status.include? "approved")
     logger.warn("stripe token::::: " + token)
-    @items = get_cart_items
-    @customer = current_customer
-    @order = Order.create(customer: @customer, total: @total)
-    @items.each do |item|
-      @order_contents = OrderContent.create(order_id: @order.id, item_id: item.id)
+    logger.warn(charge.id)
+    if charge.outcome.network_status.include? "approved"
+      @cart_items = get_cart_items
+      @customer = current_customer
+      @order = Order.create(customer: @customer, total: get_cart_total, stripe_key: charge.id)
+      @cart_items.each do |cart_item|
+      @order_contents = OrderContent.create(order_id: @order.id, item_id: cart_item[:item].id, qty: cart_item[:qty])
     end
 
+
+  end
+
+respond_to do |format|
     if @order.save && @order_contents.save
       puts "Success"
       del_cookies
-      redirect_to :root
+      format.html { redirect_to @order, notice: 'Order was succesfully created.' }
+      # format.json { render :show, status: :ok, location: @order}
     end
+  end
   end
 
 
