@@ -1,12 +1,18 @@
 var cookie = document.cookie;
-function setItemsCookie(itemId, cartCount,qty){
-
-    item = itemId+"|"+qty;
+function setItemsCookie(itemId,cartCount,qty){
     console.log(itemId.length);
     console.log("Setting Cookie");
-    document.cookie = "item_" + cartCount + "=" + item+";path=/";
-    document.cookie = "itemsInCart="+ cartCount +";path=/"
-    console.log(document.cookie)
+    cookies = cookie.split(";");
+    console.log(cookies);
+    for(i = 0; i < cookies.length;i++){
+      if (cookies[i].includes("item_"+itemId)){
+        console.log(cookies[i]);
+        cookieParams = cookies[i].split("=");
+        qty = parseInt(qty) + parseInt(cookieParams[1]);
+      }
+    }
+    document.cookie = "item_" + itemId + "=" + qty+";path=/";
+    //document.cookie = "itemsInCart="+ cartCount +";path=/"
     cookie = document.cookie;
 }
 

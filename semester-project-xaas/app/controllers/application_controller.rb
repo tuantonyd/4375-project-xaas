@@ -6,9 +6,9 @@ class ApplicationController < ActionController::Base
     logger.warn(cookies)
     cookies.each do |cookie|
       if (cookie[0].include? "item_")
-        item_cookie = cookie[1].split("|")
-        logger.warn(cookie[1])
-         @cart_items << {item: Item.find(item_cookie[0]), qty: item_cookie[1]}
+        item_cookie = cookie[0].split("item_")
+        logger.warn(item_cookie[1])
+         @cart_items << {item: Item.find(item_cookie[1]), qty: cookie[1]}
       end
     end
     return @cart_items
