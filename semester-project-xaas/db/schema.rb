@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171010210839) do
+ActiveRecord::Schema.define(version: 20171028232459) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,14 @@ ActiveRecord::Schema.define(version: 20171010210839) do
     t.index ["email"], name: "index_customers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
     t.index ["state_id"], name: "index_customers_on_state_id"
+  end
+
+  create_table "image_mappers", force: :cascade do |t|
+    t.bigint "item_id"
+    t.string "file_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_image_mappers_on_item_id"
   end
 
   create_table "items", force: :cascade do |t|
@@ -96,7 +104,13 @@ ActiveRecord::Schema.define(version: 20171010210839) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "customers", "countries"
+  add_foreign_key "customers", "states"
+  add_foreign_key "image_mappers", "items"
   add_foreign_key "order_contents", "items"
   add_foreign_key "order_contents", "orders"
+  add_foreign_key "orders", "countries"
+  add_foreign_key "orders", "customers"
   add_foreign_key "orders", "order_statuses"
+  add_foreign_key "orders", "states"
 end
