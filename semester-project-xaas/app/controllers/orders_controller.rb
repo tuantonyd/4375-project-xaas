@@ -45,7 +45,7 @@ Stripe.api_key = "sk_test_XraleY3YiXwA1SaECNkivejC"
     if charge.outcome.network_status.include? "approved"
       @cart_items = get_cart_items
       @customer = current_customer
-      @order = Order.create(customer: @customer, total: get_cart_total, stripe_key: charge.id)
+      @order = Order.create(customer: @customer, total: get_cart_total, stripe_key: charge.id, zip: params[:order][:zip], state_id: params[:order][:state_id], address: params[:order][:address], city: params[:order][:city])
       @cart_items.each do |cart_item|
       @order_contents = OrderContent.create(order_id: @order.id, item_id: cart_item[:item].id, qty: cart_item[:qty])
     end
@@ -97,7 +97,7 @@ respond_to do |format|
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:total, :notes, :customer)
+      params.require(:order).permit(:total, :notes, :state_id, :address,:city, :zip)
     end
 
     def item

@@ -1,0 +1,53 @@
+<div class="module">
+  You have <strong><%= @orders.count %></strong> orders to fulfill
+</div>
+
+<div class="module">
+  <% if ! @unavailable_inventory.any? %>
+  All of your products are stocked!
+  <% else %>
+  You are currently out of the following products:
+  <table>
+      <thead>
+        <tr>
+          <td>Name</td>
+          <td>View</td>
+        </tr>
+      </thead>
+      <tbody>
+        <% @unavailable_inventory.each do |ua_item| %>
+          <tr>
+            <td><%= ua_item.name %></td>
+          </tr>
+        <% end %>
+      </tbody>
+  </table>
+  <% end %>
+</div>
+<%= @item_popularity %>
+<% @item_popularity_state.each do |results| %>
+<td><%= results[0][0] %></td>
+<td><%= results[0][1] %></td>
+<td><%= results[1] %></td>
+<% end %>
+<table>
+  <thead>
+  <tr>
+    <td>Customer</td>
+    <td>Placed</td>
+    <td>Total</td>
+    <td>View</td>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+  <% @orders.each do |order| %>
+  <td><%= order.customer.first_name + " " + order.customer.last_name  %></td>
+  <td><%= order.created_at.strftime("Created at %m/%d/%Y") %></td>
+  <td><%= order.total %></td>
+  <td><%= link_to 'Show', order %></td>
+</tr>
+  <% end %>
+</tbody>
+</table>
+<%= will_paginate @orders %>

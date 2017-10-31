@@ -29,7 +29,7 @@ class ApplicationController < ActionController::Base
       if (cookie[0].include? "item_")
         if cookies.delete cookie[0], domain: "localhost"
           puts "Cookie deleted"
-          cookies[:itemsInCart] = 0
+          # cookies[:itemsInCart] = 0
         end
       end
     end
@@ -38,7 +38,7 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
     logger.warn("Permitted parameters:")
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :address, :city, :state_id, :stripeToken])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :zip,:last_name, :address, :city, :state_id, :stripeToken])
   end
 
 end

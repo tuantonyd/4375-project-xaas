@@ -3,10 +3,11 @@ class ItemsController < ApplicationController
   before_action :authenticate_customer!
 
 
+
   # GET /items
   # GET /items.json
   def index
-    @items = Item.all
+    @items = Item.where(available: :true)
   end
 
   # GET /items/1
