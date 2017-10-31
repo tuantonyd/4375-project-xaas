@@ -54,4 +54,8 @@ Rails.application.configure do
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+  
+  # Removes the console warning for what IP is connected to the development server
+  # https://solidfoundationwebdev.com/blog/posts/cannot-render-console-from-some-ip-with-rails
+  config.web_console.whiny_requests = false
 end
