@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
   def del_cookies
     cookies.each do |cookie|
       if (cookie[0].include? "item_")
-        if cookies.delete cookie[0], domain: "localhost"
+        if cookies.delete cookie[0], domain: "172.26.54.21"
           puts "Cookie deleted"
           # cookies[:itemsInCart] = 0
         end
