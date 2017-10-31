@@ -12,13 +12,28 @@
 
 <p>
   <strong>Customer:</strong>
-  <%= @order.customer %>
+  <%= @order.customer.first_name + " " + @order.customer.last_name %>
 </p>
 
 <p>
   <strong>Order status:</strong>
-  <%= @order.order_status %>
+  <%= @order.order_status.status %>
 </p>
+ <%= @order.to_json %>
+
+
+<table>
+  <tr>
+    <td>Item</td><td>Quantity</td>
+  </tr>
+<% @order.order_contents.each do |content| %>
+<tr>
+  <td><%= content.item.name %></td>
+  <td><%= content.qty %></td>
+</tr>
+<% end %>
+</table>
+
 
 <%= link_to 'Edit', edit_order_path(@order) %> |
 <%= link_to 'Back', orders_path %>

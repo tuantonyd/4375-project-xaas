@@ -6,9 +6,9 @@ class ApplicationController < ActionController::Base
     logger.warn(cookies)
     cookies.each do |cookie|
       if (cookie[0].include? "item_")
-        item_cookie = cookie[1].split("|")
-        logger.warn(cookie[1])
-         @cart_items << {item: Item.find(item_cookie[0]), qty: item_cookie[1]}
+        item_cookie = cookie[0].split("item_")
+        logger.warn(item_cookie[1])
+         @cart_items << {item: Item.find(item_cookie[1]), qty: cookie[1]}
       end
     end
     return @cart_items
@@ -27,9 +27,9 @@ class ApplicationController < ActionController::Base
   def del_cookies
     cookies.each do |cookie|
       if (cookie[0].include? "item_")
-        if cookies.delete cookie[0], domain: "localhost"
+        if cookies.delete cookie[0], domain: "172.26.54.21"
           puts "Cookie deleted"
-          cookies[:itemsInCart] = 0
+          # cookies[:itemsInCart] = 0
         end
       end
     end
@@ -38,7 +38,7 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
     logger.warn("Permitted parameters:")
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :address, :city, :state_id, :stripeToken])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :zip,:last_name, :address, :city, :state_id, :stripeToken])
   end
 
 end

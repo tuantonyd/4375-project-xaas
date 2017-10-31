@@ -1,7 +1,10 @@
+if (document.getElementById('#cc_number')){
 var stripe = Stripe('pk_test_mNKST1y1fXfUC1qwDjdWiJhV');
+
 var elements = stripe.elements();
 
 var card = elements.create('card');
+
 card.mount('#cc_number');
 
 var form = document.getElementById('order-form');
@@ -31,4 +34,8 @@ function stripeTokenHandler(token) {
 
   // Submit the form
   form.submit();
+}
+}
+else {
+  console.log("No cc_number fields")
 }

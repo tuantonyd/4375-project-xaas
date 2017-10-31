@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
+  devise_for :admins
   resources :orders, :items
   devise_for :customers
   get 'welcome/index'
   get '/cart', to: "items#cart", as: "cart"
   get '/checkout', to: "orders#new", as: "check_out"
   get '/cart/remove', to: "items#remove_cookie"
+
+  get '/admin', to: "admin#index"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: 'welcome#index'
 end

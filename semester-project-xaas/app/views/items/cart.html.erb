@@ -12,7 +12,7 @@
       <td><%=cart_item[:item].name%></td>
       <td><%=cart_item[:item].price%></td>
       <td><%=cart_item[:qty]%></td>
-      <td><a href="/cart/remove?cookieIndex=<%= index %>" >Remove from Cart</div></td>
+      <td><a href="/cart/remove?cookieIndex=<%= cart_item[:item].id %>" >Remove from Cart</div></td>
 
     </tr>
 <% end %>
