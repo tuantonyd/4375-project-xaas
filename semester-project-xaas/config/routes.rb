@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  devise_for :admins
   resources :orders, :items
   devise_for :customers
   get 'welcome/index'

@@ -1,5 +1,4 @@
 class AdminController < ApplicationController
-  before_action :authenticate_admin!
   layout 'admin'
   def index
     # Post.paginate(:page => params[:page], :per_page => 30)
