@@ -51833,3 +51833,37 @@ Migrating to AddAdminToCustomers (20171101204334)
   [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
   [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(6231918976790112165)[0m
   [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/admin" for 127.0.0.1 at 2017-11-04 10:09:22 -0500
+  [1m[35m (5.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by AdminController#index as HTML
+  [1m[35m (4.3ms)[0m  [1m[34mSELECT "orders"."state_id", "state_name" FROM "orders" INNER JOIN "states" ON "states"."id" = "orders"."state_id"[0m
+  Rendering admin/index.html.erb within layouts/admin
+  [1m[35m (2.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "orders" WHERE "orders"."order_status_id" = 1[0m
+  [1m[36mOrder Load (2.5ms)[0m  [1m[34mSELECT  "orders".* FROM "orders" WHERE "orders"."order_status_id" = 1 LIMIT $1 OFFSET $2[0m  [["LIMIT", 10], ["OFFSET", 0]]
+DEFVALUES DEF VALUES
+  [1m[36mOrderStatus Load (0.5ms)[0m  [1m[34mSELECT  "order_statuses".* FROM "order_statuses" WHERE "order_statuses"."status" = $1 LIMIT $2[0m  [["status", "Placed"], ["LIMIT", 1]]
+#<OrderStatus:0x007fe494ecb730>
+  [1m[36mOrderStatus Load (0.3ms)[0m  [1m[34mSELECT  "order_statuses".* FROM "order_statuses" WHERE "order_statuses"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+DEFVALUES DEF VALUES
+  [1m[36mCACHE OrderStatus Load (0.0ms)[0m  [1m[34mSELECT  "order_statuses".* FROM "order_statuses" WHERE "order_statuses"."status" = $1 LIMIT $2[0m  [["status", "Placed"], ["LIMIT", 1]]
+#<OrderStatus:0x007fe49417b5f8>
+  [1m[36mCACHE OrderStatus Load (0.0ms)[0m  [1m[34mSELECT  "order_statuses".* FROM "order_statuses" WHERE "order_statuses"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+DEFVALUES DEF VALUES
+  [1m[36mCACHE OrderStatus Load (0.0ms)[0m  [1m[34mSELECT  "order_statuses".* FROM "order_statuses" WHERE "order_statuses"."status" = $1 LIMIT $2[0m  [["status", "Placed"], ["LIMIT", 1]]
+#<OrderStatus:0x007fe49743f368>
+  [1m[36mCACHE OrderStatus Load (0.0ms)[0m  [1m[34mSELECT  "order_statuses".* FROM "order_statuses" WHERE "order_statuses"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+DEFVALUES DEF VALUES
+  [1m[36mCACHE OrderStatus Load (0.0ms)[0m  [1m[34mSELECT  "order_statuses".* FROM "order_statuses" WHERE "order_statuses"."status" = $1 LIMIT $2[0m  [["status", "Placed"], ["LIMIT", 1]]
+#<OrderStatus:0x007fe494e52998>
+  [1m[36mCACHE OrderStatus Load (0.0ms)[0m  [1m[34mSELECT  "order_statuses".* FROM "order_statuses" WHERE "order_statuses"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCustomer Load (10.5ms)[0m  [1m[34mSELECT  "customers".* FROM "customers" WHERE "customers"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE Customer Load (0.0ms)[0m  [1m[34mSELECT  "customers".* FROM "customers" WHERE "customers"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE Customer Load (0.0ms)[0m  [1m[34mSELECT  "customers".* FROM "customers" WHERE "customers"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE Customer Load (0.0ms)[0m  [1m[34mSELECT  "customers".* FROM "customers" WHERE "customers"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mItem Exists (0.7ms)[0m  [1m[34mSELECT  1 AS one FROM "items" WHERE "items"."available" = $1 LIMIT $2[0m  [["available", "f"], ["LIMIT", 1]]
+  [1m[35m (1.5ms)[0m  [1m[34mSELECT SUM(order_contents.qty) AS sum_order_contents_qty, "name" AS name FROM "orders" INNER JOIN "order_contents" ON "order_contents"."order_id" = "orders"."id" INNER JOIN "order_contents" "order_contents_orders_join" ON "order_contents_orders_join"."order_id" = "orders"."id" INNER JOIN "items" ON "items"."id" = "order_contents_orders_join"."item_id" WHERE "orders"."state_id" IN (44, 0) GROUP BY "name"[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT SUM(order_contents.qty) AS sum_order_contents_qty, "name" AS name FROM "orders" INNER JOIN "order_contents" ON "order_contents"."order_id" = "orders"."id" INNER JOIN "order_contents" "order_contents_orders_join" ON "order_contents_orders_join"."order_id" = "orders"."id" INNER JOIN "items" ON "items"."id" = "order_contents_orders_join"."item_id" WHERE "orders"."state_id" IN (36, 0) GROUP BY "name"[0m
+  Rendered admin/index.html.erb within layouts/admin (149.7ms)
+Completed 200 OK in 1412ms (Views: 1285.3ms | ActiveRecord: 52.2ms)
+
+

@@ -56,7 +56,7 @@
     <th>Quantity</th>
   </tr>
   </thead>
-<% Admin.state_report(state).each do |report_line|%>
+<% ReportingHelper.state_report(state).each do |report_line|%>
 <tr>
   <td><%= report_line[0] %></td>
   <td><%= report_line[1] %></td>
