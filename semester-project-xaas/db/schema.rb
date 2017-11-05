@@ -10,27 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171101204334) do
+ActiveRecord::Schema.define(version: 20171104154945) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "admins", force: :cascade do |t|
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer "sign_in_count", default: 0, null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.inet "current_sign_in_ip"
-    t.inet "last_sign_in_ip"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["email"], name: "index_admins_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
-  end
 
   create_table "countries", force: :cascade do |t|
     t.string "country_name"
@@ -67,14 +50,6 @@ ActiveRecord::Schema.define(version: 20171101204334) do
     t.index ["state_id"], name: "index_customers_on_state_id"
   end
 
-  create_table "image_mappers", force: :cascade do |t|
-    t.bigint "item_id"
-    t.string "file_name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["item_id"], name: "index_image_mappers_on_item_id"
-  end
-
   create_table "items", force: :cascade do |t|
     t.string "name"
     t.string "description"
@@ -82,6 +57,10 @@ ActiveRecord::Schema.define(version: 20171101204334) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.decimal "price"
+    t.string "picture_file_name"
+    t.string "picture_content_type"
+    t.integer "picture_file_size"
+    t.datetime "picture_updated_at"
   end
 
   create_table "order_contents", force: :cascade do |t|
@@ -127,7 +106,6 @@ ActiveRecord::Schema.define(version: 20171101204334) do
 
   add_foreign_key "customers", "countries"
   add_foreign_key "customers", "states"
-  add_foreign_key "image_mappers", "items"
   add_foreign_key "order_contents", "items"
   add_foreign_key "order_contents", "orders"
   add_foreign_key "orders", "countries"

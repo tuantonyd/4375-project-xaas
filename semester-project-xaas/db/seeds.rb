@@ -15,3 +15,5 @@ states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 
 states.each do |state|
 State.create({state_name: state})
 end
+
+Customer.create({first_name: "Linda", last_name: "Hickman", email: "oliver.heart.gifts@gmail.com", password: "password", password_confirmation: "password", admin: true})

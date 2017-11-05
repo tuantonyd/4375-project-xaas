@@ -14,6 +14,13 @@ class ApplicationController < ActionController::Base
     return @cart_items
   end
 
+  def verify_admin
+    logger.warn("Verifying administrator")
+    if !current_customer.try(:admin?)
+      redirect_to :forbidden
+    end
+  end
+  
   def get_cart_total
     @cart_items = get_cart_items
     total = 0.0

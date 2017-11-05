@@ -49,3 +49,4 @@ function deleteCookie(itemId){
 }
 
 console.log($('#addToCart'));
+

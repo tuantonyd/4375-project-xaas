@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_customer!
+  before_action :authenticate_customer!, only: [:new]
+
 
 
 
@@ -95,6 +96,6 @@ class ItemsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def item_params
-    params.require(:item).permit(:total, :notes, :customer, :item_status_id)
+    params.require(:item).permit(:name, :description, :price, :picture, :total, :notes, :customer, :item_status_id)
   end
 end

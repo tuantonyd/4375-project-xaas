@@ -1,7 +1,7 @@
 <%= hidden_field :item, :id , { value: @item.id, id: 'item' } %>
 <div class="row">
   <div class="col-sm-6">
-  <%= image_tag "placeholderbasket" %>
+  <%= image_tag @item.picture %>
   </div>
   <div class="col-sm-6 item">
     <h2><%= @item.name %></h2>
