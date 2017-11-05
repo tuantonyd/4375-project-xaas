@@ -15,5 +15,5 @@
 semester-project-xaas/db/schema.rb
 /node_modules
 /yarn-error.log
-
+.idea
 .byebug_history
